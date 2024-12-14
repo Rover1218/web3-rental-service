@@ -177,7 +177,7 @@ function isMobileDevice() {
 }
 
 function showMetaMaskInstallPrompt() {
-    const installLink = isMobileDevice() ? 'https://web3-rental-service.vercel.app/' : 'https://metamask.io/download.html';
+    const installLink = isMobileDevice() ? 'https://metamask.app.link/dapp/https://web3-rental-service.vercel.app/' : 'https://metamask.io/download.html';
     const appStoreLink = 'https://apps.apple.com/app/metamask/id1438144202';
     const playStoreLink = 'https://play.google.com/store/apps/details?id=io.metamask';
 
