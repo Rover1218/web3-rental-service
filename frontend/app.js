@@ -177,8 +177,22 @@ function isMobileDevice() {
 }
 
 function showMetaMaskInstallPrompt() {
-    const installLink = 'https://metamask.io/download.html';
-    showNotification(`Please install MetaMask from <a href="${installLink}" target="_blank" class="underline">here</a>`, 'info');
+    const installLink = isMobileDevice() ? 'https://metamask.app.link/dapp/your-dapp-url' : 'https://metamask.io/download.html';
+    const appStoreLink = 'https://apps.apple.com/app/metamask/id1438144202';
+    const playStoreLink = 'https://play.google.com/store/apps/details?id=io.metamask';
+
+    if (isMobileDevice()) {
+        showNotification(`
+            Please install MetaMask from one of the following options:
+            <ul>
+                <li><a href="${installLink}" target="_blank" class="underline">Open MetaMask App</a></li>
+                <li><a href="${appStoreLink}" target="_blank" class="underline">App Store</a></li>
+                <li><a href="${playStoreLink}" target="_blank" class="underline">Google Play Store</a></li>
+            </ul>
+        `, 'info');
+    } else {
+        showNotification(`Please install MetaMask from <a href="${installLink}" target="_blank" class="underline">here</a>`, 'info');
+    }
 }
 
 async function connectWallet() {
