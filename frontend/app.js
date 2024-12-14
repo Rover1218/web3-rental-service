@@ -172,13 +172,27 @@ async function checkNetwork() {
     }
 }
 
+function isMobileDevice() {
+    return /Mobi|Android/i.test(navigator.userAgent);
+}
+
+function showMetaMaskInstallPrompt() {
+    const installLink = 'https://metamask.io/download.html';
+    showNotification(`Please install MetaMask from <a href="${installLink}" target="_blank" class="underline">here</a>`, 'info');
+}
+
 async function connectWallet() {
     const button = document.getElementById('connectWallet');
     button.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Connecting...';
 
     try {
         if (!window.ethereum) {
-            throw new Error('Please install MetaMask!');
+            if (isMobileDevice()) {
+                showMetaMaskInstallPrompt();
+            } else {
+                throw new Error('Please install MetaMask!');
+            }
+            return;
         }
 
         // Request account access using ethers v6 syntax
